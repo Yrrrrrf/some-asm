@@ -1,127 +1,121 @@
-@import '../colors/_colors.scss';
+@import '_colors.scss';
 
 
 // * General
-.app_window, 
-.menu_bar, 
-.menu_bar_submenu, 
-.sidebar_button, 
-.operation_button, 
-.import_button, 
+.app_window,
+.menu_bar,
+.menu_bar_submenu,
+.sidebar_button,
+.operation_button,
+.import_button,
 .operations_page_title,
-.QTabBar::tab
-{
-    font-family: 'Consolas',  monospace;
-    font-size: 12px;
+.QTabBar::tab {
+  font-family: 'Consolas', monospace;
+  font-size: 12px;
 }
 
 
 // * App Window
 .app_window,
-.menu_bar
-{
-    background-color: $dark_base;
-    color: $light_accent;
+.menu_bar {
+  background-color: $dark_base;
+  color: $light_accent;
 }
 
 .menu_bar_submenu {
-    // set some transparency to the background
-    background-color: rgba($dark_base, 0.3);
-    border-bottom-left-radius: 20%;
-    border-bottom-right-radius: 20%;
-    background-color: $dark_base;
-    color: $light_accent;
-    border: 1px solid $light_accent_contr;
-    margin: 1px;
+  // set some transparency to the background
+  background-color: rgba($dark_base, 0.3);
+  border-bottom-left-radius: 20%;
+  border-bottom-right-radius: 20%;
+  background-color: $dark_base;
+  color: $light_accent;
+  border: 1px solid $light_accent_contr;
+  margin: 1px;
 }
 
 // * Menu Bar
-.menu_bar
-{
-    border: 1px solid $light_accent_contr;
-    margin: 1px;
+.menu_bar {
+  border: 1px solid $light_accent_contr;
+  margin: 1px;
 }
 
-.menu_bar::item::selected, 
-.menu_bar_submenu::item::selected 
-{
-    background-color: $dark_accent;
-    color: white;
+.menu_bar::item::selected,
+.menu_bar_submenu::item::selected {
+  background-color: $dark_accent;
+  color: white;
 }
 
 
 // * Display
-.display
-{
-    background-color: $dark_base;
+.display {
+  background-color: $dark_base;
 }
 
 
 // * Workspace
-.workspace
-{
-    .QTabBar::tab
-    {
-        background-color: $dark_base;
-        border: 1px solid $light_accent_contr;
-        border-top-left-radius: 10px;
-        border-top-right-radius: 10px;
-        padding: 5px;
-        color: $light_accent;  // font color
-    }
-    .QTabBar::tab:hover
-    {
-        background-color: $light_accent;
-        color: white
-    }
-
-    // Selected Tab
-    .QTabBar::tab::selected,
-    .QTabBar::tab::selected:hover 
-    {
-        background-color: $light_accent_contr;
-        border: 2px solid $light_base;
-        color: white;  // font color
-    }
-
-    // New Tab Button
-    .add_button {
-        image: url('resources/img/static/sum.png');
-        background-color: $dark_base;
-        border: 1px solid $light_accent_contr;
-        border-top-left-radius: 5%;
-        border-top-right-radius: 5%;
-        padding: 4px;  // Adds space between the tabs and the workspace
-        height: 32px;  // this is the height of the tab
-    }
-    
-    // Close Button
-    .QTabBar::close-button {
-        image: url('resources/img/static/trash.png');
-    }
-    .add_button:hover,
-    .QTabBar::close-button:hover
-    {
-        border-top: 15%;
-        border : 2px solid $light_accent_contr;
-        width: 80%;
-    }
-}
-// todo: check why this doesn't work when it's inside the .workspace_tabs class
-QTabWidget::pane {  // this also belongs to the .workspace_tabs class but it doesn't work inside it
+.workspace {
+  .QTabBar::tab {
+    background-color: $dark_base;
     border: 1px solid $light_accent_contr;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
-    // ^ probably the padding is not needed (i don't like how it looks)
-    padding: 4px;  // Adds space between the tabs and the workspace
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    padding: 5px;
+    color: $light_accent; // font color
+  }
+
+  .QTabBar::tab:hover {
+    background-color: $light_accent;
+    color: white
+  }
+
+  // Selected Tab
+  .QTabBar::tab::selected,
+  .QTabBar::tab::selected:hover {
+    background-color: $light_accent_contr;
+    border: 2px solid $light_base;
+    color: white; // font color
+  }
+
+  // New Tab Button
+  .add_button {
+    image: url('resources/img/static/sum.png');
+    background-color: $dark_base;
+    border: 1px solid $light_accent_contr;
+    border-top-left-radius: 5%;
+    border-top-right-radius: 5%;
+    padding: 4px; // Adds space between the tabs and the workspace
+    height: 32px; // this is the height of the tab
+  }
+
+  // Close Button
+  .QTabBar::close-button {
+    image: url('resources/img/static/trash.png');
+  }
+
+  .add_button:hover,
+  .QTabBar::close-button:hover {
+    border-top: 15%;
+    border: 2px solid $light_accent_contr;
+    width: 80%;
+  }
+}
+
+// todo: check why this doesn't work when it's inside the .workspace_tabs class
+QTabWidget::pane {
+  // this also belongs to the .workspace_tabs class but it doesn't work inside it
+  border: 1px solid $light_accent_contr;
+  border-bottom-left-radius: 10px;
+  border-bottom-right-radius: 10px;
+  // ^ probably the padding is not needed (i don't like how it looks)
+  padding: 4px; // Adds space between the tabs and the workspace
 }
 
 .scroll_area,
-.scroll_zone
-{
-    background-color: $dark_base;
-    border: 0px solid $light_accent_contr;
+.scroll_zone {
+  background-color: $dark_base;
+  border: 0px solid $light_accent_contr;
 }
+
 // todo: Add a custom style for scroll bar of the Workspace
 
 
@@ -134,70 +128,76 @@ QTabWidget::pane {  // this also belongs to the .workspace_tabs class but it doe
 //     height: 16px;
 // }
 .QScrollBar:vertical,
-.QScrollBar:horizontal
-{  // This represents the scroll bar & the arrow buttons
-    // border: 10px solid $light_accent_contr;
-    background: transparent;
+.QScrollBar:horizontal {
+  // This represents the scroll bar & the arrow buttons
+  // border: 10px solid $light_accent_contr;
+  background: transparent;
 }
+
 .QScrollBar::handle:vertical,
-.QScrollBar::handle:horizontal
-{  // This is the scroll bar itself
-    background: $light_accent_contr;
-    // border-radius: 20%;
+.QScrollBar::handle:horizontal {
+  // This is the scroll bar itself
+  background: $light_accent_contr;
+  // border-radius: 20%;
 }
+
 .QScrollBar::add-page:vertical,
 .QScrollBar::sub-page:vertical,
 .QScrollBar::add-page:horizontal,
-.QScrollBar::sub-page:horizontal
-{  // This is the background of the scroll bar
-    background: $dark_base_faded;
+.QScrollBar::sub-page:horizontal {
+  // This is the background of the scroll bar
+  background: $dark_base_faded;
 }
+
 // Arrow buttons
 .QScrollBar::up-arrow:vertical,
 .QScrollBar::down-arrow:vertical,
 .QScrollBar::left-arrow:horizontal,
-.QScrollBar::right-arrow:horizontal
-{
-    border: 2px solid $light_accent_contr;
-    // background: $light_accent_contr;
-    background: transparent;
+.QScrollBar::right-arrow:horizontal {
+  border: 2px solid $light_accent_contr;
+  // background: $light_accent_contr;
+  background: transparent;
 }
 
 // ? ------------------------------------------------------------------------------------------
 
 // * Visualizer
 .visualizer {
-    // background-color: $dark_base_contr;
-    background-color: transparent;
-    // * This variable repesents the the color of the border
-    // * It's only visible when the visualizer is empty
-    // * Or if the "border" lenght is > 0
-    // border: 1px solid $light_accent_contr;
-    // border-radius: 10%;
+  // background-color: $dark_base_contr;
+  background-color: transparent;
+  // * This variable repesents the the color of the border
+  // * It's only visible when the visualizer is empty
+  // * Or if the "border" lenght is > 0
+  // border: 1px solid $light_accent_contr;
+  // border-radius: 10%;
 }
 
 // ? ------------------------------------------------------------------------------------------
 
 // * Side Panel
 .side_panel {
-    background-color: $dark_accent;
-    border: 1px solid $light_accent_contr;
-    border-radius: 10%;
+  background-color: $dark_accent;
+  border: 1px solid $light_accent_contr;
+  border-radius: 10%;
 }
+
 .side_panel:hover {
-    background-color: $dark_accent;  // this is a redundancy, is just to make sure that the background color doesn't change
+  background-color: $dark_accent; // this is a redundancy, is just to make sure that the background color doesn't change
 }
 
 // * Side Panel Buttons
-.sidebar_button, .operation_button {
-    background: white;
-    border-radius: 10%;
-    // * Uncomment this for the Font Awesome icons (still in development)
-    //     font-weight: 600;  // bold
-    // color: $light_accent;  // font color
+.sidebar_button,
+.operation_button {
+  background: white;
+  border-radius: 10%;
+  // * Uncomment this for the Font Awesome icons (still in development)
+  //     font-weight: 600;  // bold
+  // color: $light_accent;  // font color
 }
-.sidebar_button:hover, .operation_button:hover {
-    background-color: lightcyan;
-    border: 2px solid $light_hard_contr;
-    border-radius: 12%;
+
+.sidebar_button:hover,
+.operation_button:hover {
+  background-color: lightcyan;
+  border: 2px solid $light_hard_contr;
+  border-radius: 12%;
 }
