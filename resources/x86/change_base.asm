@@ -15,6 +15,7 @@ org 0x100           ; Origen para un programa .com
 section .text
 global _start
 
+
 _start:
     ; --- 1. Imprimir la información del número original ---
     mov si, msg_orig
