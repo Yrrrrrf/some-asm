@@ -1,6 +1,8 @@
 # standard imports
 from dataclasses import dataclass
-from functools import partial  # ? To pass arguments to a function in a lambda expression
+from functools import (
+    partial,
+)  # ? To pass arguments to a function in a lambda expression
 
 # third-party imports
 from PyQt6.QtWidgets import QFrame, QPushButton
@@ -13,53 +15,69 @@ from config.globals import Assets
 
 @dataclass
 class SidePanel(QFrame):  # QWidget, but temporary is a QFrame just for testing
-    '''
+    """
     Side Bar contains the tools and the settings of the application.
-    '''
+    """
+
     margin: int = 8  # margin between the buttons
     buttons_size: int = 48  # default size of the buttons
     is_expanded: bool = False  # Flag to track the toggle state
 
-
     def __init__(self):
         super().__init__()
-        self.setProperty('class', 'side_panel')
-        self.setMinimumWidth(self.margin*2 + self.buttons_size)  # set the initial size of the side bar (not expanded)
+        self.setProperty("class", "side_panel")
+        self.setMinimumWidth(
+            self.margin * 2 + self.buttons_size
+        )  # set the initial size of the side bar (not expanded)
 
         for i in range(5):
-            s = SPButton(self, 'gallery', [{'name': 'Some', 'fn': partial(lambda i: print(f'Some_{i}'), i)}])
+            s = SPButton(
+                self,
+                "gallery",
+                [{"name": "Some", "fn": partial(lambda i: print(f"Some_{i}"), i)}],
+            )
             s.move(self.margin, self.margin + (i * (self.buttons_size + self.margin)))
 
-
     def mousePressEvent(self, event):
-        '''
+        """
         When the mouse is pressed, the side bar will expand or collapse.
-        '''
+        """
         if event.button() == Qt.MouseButton.LeftButton:
             match self.is_expanded:
-                case True: self.setFixedWidth(self.margin*2 + self.buttons_size)
-                case False: self.setFixedWidth(200)
-            self.is_expanded = not self.is_expanded  
+                case True:
+                    self.setFixedWidth(self.margin * 2 + self.buttons_size)
+                case False:
+                    self.setFixedWidth(200)
+            self.is_expanded = not self.is_expanded
 
 
 @dataclass
 class SPButton(QPushButton):
-    '''
+    """
     SideBarButton class contains a list of operations that can be executed to an image.
     Every operation is a button will appear in the Operations Menu.
-    '''
+    """
+
     side_panel: SidePanel  # ? Parent Widget
     operations: list[dict]  # ? list of operations
-
 
     def __init__(self, side_panel: SidePanel, name: str, operations: list[dict]):
         super().__init__(side_panel)
         self.operations = operations
-        self.setProperty('class', 'sidebar_button')
-        self.setIcon(QIcon(Assets.ICONS.value+name.lower()+'.png'))
-        self.setIconSize(QSize((int)(side_panel.buttons_size*0.8), (int)(side_panel.buttons_size*0.8)))
-        self.setFixedSize(side_panel.buttons_size, side_panel.buttons_size)  # default size
-        self.clicked.connect(self.operations[0]['fn'])  # ? connect the button to the first operation
+        self.setProperty("class", "sidebar_button")
+        self.setIcon(QIcon(Assets.ICONS.value + name.lower() + ".png"))
+        self.setIconSize(
+            QSize(
+                (int)(side_panel.buttons_size * 0.8),
+                (int)(side_panel.buttons_size * 0.8),
+            )
+        )
+        self.setFixedSize(
+            side_panel.buttons_size, side_panel.buttons_size
+        )  # default size
+        self.clicked.connect(
+            self.operations[0]["fn"]
+        )  # ? connect the button to the first operation
 
 
 # @dataclass
@@ -141,7 +159,7 @@ class SPButton(QPushButton):
 #             active_buffer.setPixmap(QPixmap.fromImage(active_buffer.q_image))
 #             # save the image
 #             active_buffer.image_path = 'resources\\img\\temp\\edit.png'  # update image path
-#             # img = cv.imwrite('resources\\img\\temp\\edit.png', cv_image., format=)  # save it in the temp directory 
+#             # img = cv.imwrite('resources\\img\\temp\\edit.png', cv_image., format=)  # save it in the temp directory
 #             # save it in bgr format
 #             cv_image = cv.cvtColor(cv_image, cv.COLOR_RGB2BGR)
 #             cv.imwrite('resources\\img\\temp\\edit.png', cv_image)
@@ -150,9 +168,6 @@ class SPButton(QPushButton):
 #             active_buffer.update()
 #         except ImportError:
 #             print('\nError: No image selected')
-
-
-
 
 
 # from dataclasses import dataclass

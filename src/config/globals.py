@@ -11,6 +11,7 @@ class Config(Enum):
     """
     Project Config
     """
+
     # App info
     NAME = "Some Assembly"
     VERSION = "v0.1.0"
@@ -28,6 +29,7 @@ class Assets(Enum):
     """
     Assets paths
     """
+
     # todo: Check if this works properly on a UNIX system (Linux, MacOS, etc.)
     # * Probably not because of the backslash. It should be a forward slash
     # * So, I'll have to change it to a forward slash
@@ -35,7 +37,7 @@ class Assets(Enum):
     ASM_DOCS = "resources/asm/"
     THEMES = "resources/themes/"
     COLOR_SCHEMA = "resources/colors/"
-    
+
     # todo: Check why using `str` as the type of the last enum value is causing an error
     # COLOR_SCHEMA: str = "resources/color_schemes/"
     # Fonts
@@ -60,7 +62,7 @@ class Assets(Enum):
 #     secondary_color: tuple
 #     highlight_color: tuple
 #     font: str
-    
+
 
 #     def __init__(self, main_color, secondary_color, highlight_color, font):
 #         # use the name of the enum as the title but in title case

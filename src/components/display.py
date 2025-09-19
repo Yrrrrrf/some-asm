@@ -13,29 +13,28 @@ from config.globals import Assets
 
 @dataclass
 class Display(QFrame):
-    '''
+    """
     Display class referece to the window that contains all the widgets.
     Also manage the position of the widgets and the size of the window.
     This class must the the main class of the application.
-    '''
+    """
+
     side_panel: SidePanel  # * Maybe the Display can have more than one side panel along the window
     # workspace_tabs: QTabWidget  # * Handles 1 or many workspaces
     workspace: Workspace  # * Handles 1 or many workspaces
 
-
     def __init__(self):
         super().__init__()
-        self.setProperty('class', 'display')
+        self.setProperty("class", "display")
 
         # self.side_panel = SidePanel()
         self.workspace = Workspace()
-        
+
         layout = QGridLayout()  # ? Set the layout distribution
         # layout.addWidget(self.side_panel, 0, 0)  # * Expand and fill the space
         layout.addWidget(self.workspace, 0, 1)
 
         self.setLayout(layout)
-
 
     # * Manage the shortcuts used in the display behavior (add & remove tabs, etc.)
     def keyPressEvent(self, event):
@@ -50,5 +49,9 @@ class Display(QFrame):
                     case 39:  # W  # * Close the current tab
                         self.workspace._close_tab(self.workspace.currentIndex())
                     case _:  # * Go to the tab of the number
-                        if number <= self.workspace.count():  # If the number is less than the number of tabs
-                            self.workspace.setCurrentIndex(number - 1)  # Go to the tab of the number
+                        if (
+                            number <= self.workspace.count()
+                        ):  # If the number is less than the number of tabs
+                            self.workspace.setCurrentIndex(
+                                number - 1
+                            )  # Go to the tab of the number
