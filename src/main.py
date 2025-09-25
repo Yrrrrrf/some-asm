@@ -56,7 +56,7 @@ if __name__ == "__main__":
     Clean the terminal and print app data before running the main function.
     Then run the main function.
     """
-    print("\033[2J\033[1;1H", end="")  # clear terminal
+    # print("\033[2J\033[1;1H", end="")  # clear terminal
     print(
         f"\033[92m{Config.NAME.value}\033[0m", end=" "
     )  # print n puzzle solver in green

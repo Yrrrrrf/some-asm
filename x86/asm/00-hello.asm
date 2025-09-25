@@ -2,6 +2,9 @@
 ; "Hola, mundo!" escrito para la BIOS, compatible con 8086tiny.
 ; Imprime el mensaje caracter por caracter usando la interrupción de video.
 
+; Oh no!
+
+
 org 0x100          ; Origen para un programa .com
 
 section .text
