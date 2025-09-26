@@ -12,30 +12,18 @@ Simplify your project management with "Some Assembly", a user-friendly tool desi
 ## Setup
 The current python version is `3.11.*`. It is recommended to use the same version to avoid any issues.  
 
-The project is still on development, so the **setup is not automated yet**.
+This project uses `uv` to manage the python environment.
 
 - Create and activate the virtual environment
 ```bash
-# Using venv std module as package manager
-python -m venv .venv  # create the environment
-source .venv/bin/activate  # activate on linux
-.venv\Scripts\activate  # activate on windows
-pip install -r requirements.txt # install dependencies
-
-# Using conda (or mamba) as package manager
-conda env create -f environment.yml  # create the environment
-conda activate cv  # activate the environment
+# Using uv as package manager
+uv sync  # create the environment and install dependencies
 ```
 
 - Run the project from the root directory
 ```bash
-python src/main.py  # run the main file
-```
-
-## Test the project
-To be sure that everything is working as expected, run the tests.
-```bash
-python -m unittest discover -s src/tests -p test_*.py  # run all tests in src/tests
+# Using uv to run the main script
+uv run src/main.py  # run the main file
 ```
 
 ![sample](./resources/img/sample.png)
@@ -44,7 +32,7 @@ python -m unittest discover -s src/tests -p test_*.py  # run all tests in src/te
 
 This project is licensed under the [MIT License](./LICENSE).
 
-But it also uses [PyQt6](https://www.riverbankcomputing.com/software/pyqt/) and [OpenCV](https://opencv.org/) which have their own licenses.
+But it also uses [PyQt6](https://www.riverbankcomputing.com/software/pyqt/) which have their own license.
 - [PyQt6 License](https://www.riverbankcomputing.com/static/Docs/PyQt6/introduction.html#license) (GPLv3 License)
 
 ## Attributions
