@@ -1,9 +1,13 @@
-feat(x86): add signed 16-bit integer parsing script
+feat(x86): add hexadecimal parsing script and fix build
 
-This commit introduces a new assembly script `2x-03-parse-i16.asm` that parses a signed 16-bit integer from the command-line arguments.
+This commit introduces a new assembly script `2x-04-parse-hex.asm` that parses a hexadecimal number from the command-line arguments.
 
 The script includes the following features:
-- Parsing of a string representation of a number from the command line.
-- Handling of an optional leading '-' for negative numbers.
+- Parsing of a string representation of a hexadecimal number from the command line.
+- Handling of an optional leading "0x".
 - Conversion of the ASCII string to a 16-bit integer.
 - Printing the decimal representation of the number.
+
+This commit also fixes a "short jump out of range" build error that was present in the previous commit by restructuring the code.
+
+Finally, this commit removes the temporary file `commit_msg.tmp`.
