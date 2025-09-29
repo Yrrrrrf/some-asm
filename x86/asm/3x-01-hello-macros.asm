@@ -5,8 +5,8 @@
 ; =============================================================================
 
 ; --- Include our libraries first ---
-%include "macros.inc"
-%include "lib.inc"
+%include "asm/macros.inc"
+%include "asm/lib.inc"
 
 
 program_begin
