@@ -1,14 +1,13 @@
 ; =============================================================================
-;   2x-01-parse-int.asm
-;   Parses the first command-line argument as a signed decimal integer.
+;   2x-01-parse-u16.asm
+;   Parses the first command-line argument as an unsigned decimal integer.
 ;
 ;   - Skips leading spaces.
-;   - Handles optional '+' or '-' sign.
-;   - Converts digits to a 16-bit signed integer in AX.
+;   - Converts digits to a 16-bit unsigned integer in AX.
 ;   - Prints the parsed number back in decimal for confirmation.
 ;
-;   Usage: run-asm asm/2x-01-parse-int.asm -42
-;   Output: Parsed: -42
+;   Usage: run-asm asm/2x-01-parse-u16.asm 65535
+;   Output: Parsed: 65535
 ;
 ;   Note: Only the first argument is processed. Non-numeric input prints an error.
 ; =============================================================================
@@ -33,28 +32,12 @@ _start:
     ; --- Step 2: Skip leading spaces ---
 .skip_spaces:
     cmp byte [si], ' '
-    jne .check_sign
+    jne .start_parse
     inc si
     loop .skip_spaces
     jmp .invalid        ; Only spaces? Invalid.
 
-    ; --- Step 3: Check for optional sign ---
-.check_sign:
-    mov bl, 0           ; BL = 0 → positive; BL = 1 → negative
-    cmp byte [si], '-'
-    jne .check_plus
-    mov bl, 1
-    inc si
-    dec cx
-    jmp .start_parse
-
-.check_plus:
-    cmp byte [si], '+'
-    jne .start_parse
-    inc si
-    dec cx
-
-    ; --- Step 4: Parse digits into AX ---
+    ; --- Step 3: Parse digits into AX ---
 .start_parse:
     xor ax, ax          ; Clear accumulator (AX = 0)
 
@@ -75,7 +58,9 @@ _start:
     push bx             ; Save BX (used for the multiplier)
     mov bx, 10          ; Multiplier
     mul bx              ; DX:AX = AX * 10
-    ; For inputs <= 6553, AX*10 <= 65530, so DX will be 0. We ignore DX.
+    ; For inputs <= 65535, AX*10 can overflow. Check DX.
+    cmp dx, 0
+    jne .invalid        ; Overflow
     pop bx              ; Restore BX
 
     ; --- Add current digit ---
@@ -83,6 +68,7 @@ _start:
     sub dl, '0'         ; Convert ASCII digit to numeric value (0-9)
     xor dh, dh          ; Clear DH to make DX a 16-bit value (0-9)
     add ax, dx          ; Add the digit to the accumulated value
+    jc .invalid         ; Overflow
 
     ; Advance
     inc si
@@ -90,11 +76,6 @@ _start:
     jmp .parse_loop
 
 .done_parsing:
-    ; Apply sign if needed
-    test bl, bl
-    jz .print_result
-    neg ax
-
 .print_result:
     ; Print "Parsed: "
     mov si, msg_parsed
@@ -140,22 +121,13 @@ PrintString:
     ret
 
 ; -----------------------------------------------------------------------------
-; PrintAX_Decimal: Prints the signed 16-bit integer in AX as decimal.
-; Handles negative numbers.
+; PrintAX_Decimal: Prints the unsigned 16-bit integer in AX as decimal.
 ; -----------------------------------------------------------------------------
 PrintAX_Decimal:
     push ax
     push bx
     push cx
     push dx
-
-    ; Check if negative
-    cmp ax, 0
-    jge .positive
-    neg ax
-    mov al, '-'
-    mov ah, 0x0E
-    int 0x10
 
 .positive:
     mov cx, 10
