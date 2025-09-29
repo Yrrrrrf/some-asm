@@ -1,0 +1,9 @@
+feat(x86): add signed 16-bit integer parsing script
+
+This commit introduces a new assembly script `2x-03-parse-i16.asm` that parses a signed 16-bit integer from the command-line arguments.
+
+The script includes the following features:
+- Parsing of a string representation of a number from the command line.
+- Handling of an optional leading '-' for negative numbers.
+- Conversion of the ASCII string to a 16-bit integer.
+- Printing the decimal representation of the number.
