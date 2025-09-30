@@ -23,4 +23,4 @@ _start:
 ;   This is the magic line. NASM will pause, read the entire contents of
 ;   'fn/print-external-message.inc', and paste them right here before continuing to assemble.
 ; =============================================================================
-%include "asm/fn/print-external-message.inc"
+%include "lib/io.inc"

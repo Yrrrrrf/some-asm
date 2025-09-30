@@ -1,6 +1,6 @@
-# Assembly (ASM) Note
+# Source (SRC) Note
 
-Some notes on assembly language (ASM) and related resources...
+Some notes on source language (SRC) and related resources...
 
 ## Resources
 

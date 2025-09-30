@@ -6,7 +6,7 @@
 ;   - Case-insensitive comparison.
 ;   - Prints the parsed boolean value.
 ;
-;   Usage: nasm -f bin asm/2x-05-parse-bool.asm -o 2x-05-parse-bool.com
+;   Usage: nasm -f bin src/03-cli/05-parse-bool.asm -o 05-parse-bool.com
 ;          ./2x-05-parse-bool.com true
 ;   Output: Parsed: true
 ; =============================================================================

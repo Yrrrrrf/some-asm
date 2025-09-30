@@ -1,14 +1,14 @@
 ; =============================================================================
-;   2x-03-parse-i16.asm
-;   Parses a signed 16-bit integer from the first command-line argument.
+;   2x-04-parse-hex.asm
+;   Parses a hexadecimal number from the first command-line argument.
 ;
-;   - Handles an optional leading '-' for negative numbers.
+;   - Handles an optional leading "0x".
 ;   - Converts the ASCII string to a 16-bit integer.
 ;   - Prints the decimal representation of the number.
 ;
-;   Usage: nasm -f bin asm/2x-03-parse-i16.asm -o 2x-03-parse-i16.com
-;          ./2x-03-parse-i16.com -123
-;   Output: Parsed: -123
+;   Usage: nasm -f bin src/03-cli/04-parse-hex.asm -o 04-parse-hex.com
+;          ./2x-03-parse-hex.com 0xFF
+;   Output: Parsed: 255
 ; =============================================================================
 org 0x100
 
@@ -16,7 +16,6 @@ section .data
     msg_parsed   db 'Parsed: ', 0
     msg_invalid  db 'Invalid or no argument', 0x0D, 0x0A, 0
     newline      db 0x0D, 0x0A, 0
-    is_negative  db 0
 
 section .text
 global _start
@@ -28,31 +27,39 @@ _start:
     jcxz .invalid_input
 
     mov si, 0x81
+    jmp .main_logic
+
+.invalid_input:
+    mov si, msg_invalid
+    call PrintString
+    jmp .exit
+
+.main_logic:
 
     ; --- Skip leading spaces ---
 .skip_spaces:
     cmp cx, 0
     je .invalid_input
     cmp byte [si], ' '
-    jne .check_sign
+    jne .check_prefix
     inc si
     dec cx
     jmp .skip_spaces
 
-.check_sign:
-    ; --- Check for negative sign ---
-    cmp byte [si], '-'
+.check_prefix:
+    ; --- Check for "0x" prefix ---
+    cmp byte [si], '0'
     jne .parse_loop
-    mov byte [is_negative], 1
-    inc si
-    dec cx
-    jz .invalid_input ; No numbers after sign
+    cmp byte [si+1], 'x'
+    jne .parse_loop
+    add si, 2
+    sub cx, 2
+    jcxz .invalid_input ; No numbers after prefix
 
     ; --- Parse the integer string ---
 .parse_loop:
     xor ax, ax             ; Parsed number
     xor bx, bx             ; Current digit
-    mov di, 10             ; For multiplication
 
 .convert_char:
     cmp cx, 0
@@ -62,25 +69,45 @@ _start:
     je .done_parsing
 
     ; --- Convert character to digit ---
-    sub bl, '0'
-    jc .invalid_input      ; Not a digit
-    cmp bl, 9
-    ja .invalid_input      ; Not a digit
+    cmp bl, '0'
+    jb .invalid_input
+    cmp bl, '9'
+    jbe .is_digit
 
-    ; --- Add to total ---
-    mul di                 ; ax = ax * 10
-    add ax, bx             ; ax = ax + digit
+    cmp bl, 'A'
+    jb .invalid_input
+    cmp bl, 'F'
+    jbe .is_uppercase_hex
+
+    cmp bl, 'a'
+    jb .invalid_input
+    cmp bl, 'f'
+    jbe .is_lowercase_hex
+
+    jmp .invalid_input
+
+.is_digit:
+    sub bl, '0'
+    jmp .add_to_total
+
+.is_uppercase_hex:
+    sub bl, 'A'
+    add bl, 10
+    jmp .add_to_total
+
+.is_lowercase_hex:
+    sub bl, 'a'
+    add bl, 10
+
+.add_to_total:
+    shl ax, 4              ; ax = ax * 16
+    add al, bl             ; ax = ax + digit
 
     inc si
     dec cx
     jmp .convert_char
 
 .done_parsing:
-    ; --- Apply sign ---
-    cmp byte [is_negative], 1
-    jne .print_result
-    neg ax                 ; Two's complement for negative
-
 .print_result:
     mov si, msg_parsed
     call PrintString
@@ -90,10 +117,6 @@ _start:
     mov si, newline
     call PrintString
     jmp .exit
-
-.invalid_input:
-    mov si, msg_invalid
-    call PrintString
 
 .exit:
     mov ah, 0x4C

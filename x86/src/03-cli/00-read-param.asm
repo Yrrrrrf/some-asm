@@ -2,7 +2,7 @@
 ;   2x-00-read-param.asm
 ;   Reads and prints the first (and only) command-line argument passed to the .com file.
 ;
-;   Usage: run-asm asm/2x-00-read-param.asm YourName
+;   Usage: run-src src/03-cli/00-read-param.asm YourName
 ;   Output: YourName
 ;
 ;   Note: emu2 places command-line args in the standard DOS PSP format.

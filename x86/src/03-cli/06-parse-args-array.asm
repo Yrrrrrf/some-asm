@@ -7,7 +7,7 @@
 ;   - Stores argument pointers in an `argv` array.
 ;   - Prints the argument count and each argument on a new line.
 ;
-;   Usage: nasm -f bin asm/2x-06-parse-args.asm -o 2x-06-parse-args.com
+;   Usage: nasm -f bin src/03-cli/06-parse-args-array.asm -o 06-parse-args-array.com
 ;          ./2x-06-parse-args.com arg1 "arg 2" arg3
 ;   Output: argc: 3
 ;           argv[0]: arg1

@@ -6,7 +6,7 @@
 ;   - Converts digits to a 16-bit unsigned integer in AX.
 ;   - Prints the parsed number back in decimal for confirmation.
 ;
-;   Usage: run-asm asm/2x-01-parse-u16.asm 65535
+;   Usage: run-src src/03-cli/01-parse-u16.asm 65535
 ;   Output: Parsed: 65535
 ;
 ;   Note: Only the first argument is processed. Non-numeric input prints an error.

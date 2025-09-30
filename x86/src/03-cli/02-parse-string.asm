@@ -6,7 +6,7 @@
 ;   - Extracts characters until a space or the end of the line.
 ;   - Prints the parsed string.
 ;
-;   Usage: run-asm asm/2x-02-parse-str.asm hello
+;   Usage: run-src src/03-cli/02-parse-string.asm hello
 ;   Output: Parsed: hello
 ;
 ;   Note: Only the first argument is processed.
