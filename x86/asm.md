@@ -1,6 +1,8 @@
-# Source (SRC) Note
+# Source ASSEMBLY Note
 
-Some notes on source language (SRC) and related resources...
+Some notes on source language (ASM) and related resources...
+
+This notebook is based on emu2 & nasm... To get an accurate appox to the original x8086 w/ 16-bits
 
 ## Resources
 
@@ -8,3 +10,4 @@ Some notes on source language (SRC) and related resources...
 - [NASM Documentation](https://www.nasm.us/doc/)
 - [Assembly Language Tutorial](https://www.tutorialspoint.com/assembly_programming/index.htm)
 
+> TODO: Add 03-cli-addvanced "select menu"
