@@ -22,6 +22,7 @@ classifiers = [
 dependencies = [
     "libsass>=0.23.0",
     "pyqt6>=6.9.1",
+    "qt-ingot>=0.0.1",
 ]
 
 [project.urls]

@@ -1,68 +1,74 @@
-"""
-Some Assembly
+import sys
+from PyQt6.QtWidgets import QApplication, QLabel
 
-This is the main file of the application. It is responsible for setting up the logging system and configuring it.
+from rune import AssetNotFoundError, assets
 
-Author(s):
-    - Fernando Bryan Reza Campos <fer.rezac@outlook.com>
-    - pana 1 <pana1@example.com>
-    - pana 2 <pana2@example.com>
-"""
-
-# standard imports
-from sys import exit, argv
-
-# third-party imports
-from PyQt6.QtWidgets import QApplication
-from PyQt6.QtCore import QTimer
-
-# local imports
-from components.loading_screen import LoadingScreen
-from config.globals import Config
-from components.app import App
+from ingot.app import IngotApp
+from ingot.views.base import BaseView
 
 
-def main() -> None:
-    """
-    Application entry point.
+# --- Step 1: Define the application's custom view ---
+# This remains the same. The developer provides the content for the tabs.
+class MyTestView(BaseView):
+    """A simple custom view that displays a label."""
+    def __init__(self):
+        super().__init__()
+        label = QLabel("This is a custom view inside a new tab!\n\nClose this tab or press '+' to create another one.")
+        label.setStyleSheet("font-size: 20px;")
+        self.layout().addWidget(label)
 
-    It is also responsible for setting up the logging system and configuring it.
-    """
-    app = QApplication(
-        argv
-    )  # Manage the GUI application's control flow and main settings.
-    main_window = App()  # Create the instance of the MainWindow
+# --- Step 2: Define the Application's Configuration ---
+# Instead of setting the title and icon manually, we define a simple dictionary.
+# `qt-ingot` will use this to configure the application window.
+# The icon path is a `rune-lib` friendly path, which `IngotApp` will resolve.
+APP_CONFIG = {
+    "title": "Some Assembly",
+    "version": "0.0.1",
+    "author": "My Name",
+    "icon": "img.template"  # A rune-lib friendly path
+}
 
-    # show_loading_screen = True
-    show_loading_screen = False
-    match show_loading_screen:
-        case True:
-            loading_screen = LoadingScreen()
-            loading_screen.show()
-            QTimer.singleShot(
-                2000, loading_screen.close
-            )  # Execute the main_window.show() function after 2 seconds
-            QTimer.singleShot(
-                2000, main_window.show
-            )  # Execute the main_window.show() function after 2 seconds
-        case False:
-            main_window.show()  # Show the main window
-    exit(app.exec())  # Execute the app
+
+# --- Step 3: Define the Menu Structure ---
+# MODIFIED to include a unique `id` for each action.
+# This ID is used for registration in the ActionManager.
+
+
+
+# --- Step 4: The Main Application Logic ---
+def main():
+    app = QApplication(sys.argv)
+
+    # --- Use `qt-ingot` to build the window ---
+    # We pass our view and the configuration dictionary to the IngotApp.
+    # It handles the rest, including setting the title and icon.
+    main_window = IngotApp(view_factory=MyTestView, config=APP_CONFIG)
+
+    MENU_CONFIG = {
+        "File": [
+            {"id": "file.new_tab", "name": "New Tab", "shortcut": "T", "function": main_window.workspace.new_tab},
+            {"id": "file.close_tab", "name": "Close Tab", "shortcut": "W", "function": lambda: main_window.workspace.close_tab(main_window.workspace.currentIndex())},
+            {"id": "file.exit", "name": "Exit", "shortcut": "Esc", "function": sys.exit}
+        ],
+        "Help": [
+            {"id": "help.about", "name": "About", "function": lambda: print("About This App!")}
+        ]
+    }
+
+    # --- Set the Menu Bar ---
+    # With the menu defined in a dictionary, we can set it with a single call.
+    main_window.set_menu(MENU_CONFIG)
+
+    # --- Add a Side Panel ---
+    # The layout system allows adding widgets to the side.
+    # Here, we add a simple label as a left-side panel.
+    side_panel = QLabel("Side Panel")
+    side_panel.setObjectName("sidePanel")
+    main_window.set_side_panel(side_panel, position='left')
+
+    main_window.show()
+    sys.exit(app.exec())
 
 
 if __name__ == "__main__":
-    """
-    This is the entry point of the application.
-    Clean the terminal and print app data before running the main function.
-    Then run the main function.
-    """
-    # print("\033[2J\033[1;1H", end="")  # clear terminal
-    print(
-        f"\033[92m{Config.NAME.value}\033[0m", end=" "
-    )  # print n puzzle solver in green
-    print(f"\033[97m{Config.VERSION.value}\033[0m")  # print version in white
-    print(
-        f"Author(s): \033[94m{Config.AUTHOR.value}\033[0m", end="\n\n"
-    )  # print author in blue
-
-    main()  # run main function
+    main()
