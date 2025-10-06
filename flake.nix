@@ -14,7 +14,7 @@
         pkgs.nasm
         pkgs.emu2
         pkgs.uv
-        (pkgs.writeShellScriptBin "run-asm" (builtins.readFile ./examples/asm/x86-16-nasm/run-asm.sh))
+        (pkgs.writeShellScriptBin "run-asm" (builtins.readFile ./src/run-asm.sh))
       ];
       shellHook = ''
         echo "Assembly & Python Development ENV Ready!"
