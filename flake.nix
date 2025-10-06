@@ -1,6 +1,5 @@
-# x86/flake.nix
 {
-  description = "Entorno de desarrollo para ensamblador x86";
+  description = "Development environment for assembly programming and Python tools";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
@@ -14,12 +13,13 @@
       packages = [
         pkgs.nasm
         pkgs.emu2
-        (pkgs.writeShellScriptBin "run-asm" (builtins.readFile ./run-asm.sh))
+        pkgs.uv
+        (pkgs.writeShellScriptBin "run-asm" (builtins.readFile ./examples/asm/x86-16-nasm/run-asm.sh))
       ];
       shellHook = ''
-        echo "¡x8086 ENV Ready!"
+        echo "Assembly & Python Development ENV Ready!"
         echo "-------------------------------------"
-        echo "Available tools: nasm, emu2"
+        echo "Available tools: nasm, emu2, uv"
         echo "Custom command: run-asm <file.asm>"
       '';
     };
