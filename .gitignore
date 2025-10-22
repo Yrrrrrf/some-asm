@@ -11,3 +11,8 @@ wheels/
 
 
 **/**.com
+
+.ruff_cache
+.pytest_cache
+
+# **.lock

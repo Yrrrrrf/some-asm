@@ -22,7 +22,7 @@ classifiers = [
 dependencies = [
     "rich>=14.2.0",
     "pyqt6>=6.9.1",
-    "qt-ingot>=0.0.1",
+    "qt-ingot>=0.0.2",
 ]
 
 [project.urls]

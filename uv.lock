@@ -1,11 +1,6 @@
 version = 1
 revision = 3
 requires-python = ">=3.12"
-resolution-markers = [
-    "python_full_version >= '3.14' and platform_python_implementation != 'PyPy'",
-    "python_full_version < '3.14' and platform_python_implementation != 'PyPy'",
-    "platform_python_implementation == 'PyPy'",
-]
 
 [[package]]
 name = "libsass"
@@ -105,16 +100,16 @@ wheels = [
 
 [[package]]
 name = "qt-ingot"
-version = "0.0.1"
+version = "0.0.2"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "libsass" },
     { name = "pyqt6" },
     { name = "rune-lib" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/02/b9/61890d53e8301a8d659f8fbb5f5e306efe20d7ce5cdd297691980d806ab7/qt_ingot-0.0.1.tar.gz", hash = "sha256:cd9051b9b44b0185f92736ac9ff66a07f406e80884ca2a2f1f2145c09b869cb4", size = 24578, upload-time = "2025-09-30T09:38:57.383Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/52/3b/738ed7117ff50853c91b51ecd432a093141cf637c6df38a440fbb3351328/qt_ingot-0.0.2.tar.gz", hash = "sha256:fc18bbf3891e60ab425a51511b34522a937a0758c431354d811ef78cafe67c57", size = 29315, upload-time = "2025-10-19T02:39:23.51Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/a1/02/6455763a63f5bc9d99bf2f88374fe6691f145f78e3610a1d7482392e0b14/qt_ingot-0.0.1-py3-none-any.whl", hash = "sha256:eddcac7ca139a73733cb4455eb6209e61025ae3846ebb9b57578eb043f0a72b1", size = 9329, upload-time = "2025-09-30T09:38:55.845Z" },
+    { url = "https://files.pythonhosted.org/packages/59/f9/0ddaad7e6b779c4700d12bd5d4831dac54ff6afd99d1c9c86a4739fb464c/qt_ingot-0.0.2-py3-none-any.whl", hash = "sha256:dc09bac6c5d3894a27dcfe94585864f5a284d96bb93313ebc8ef8ac1b2a1cdb7", size = 13783, upload-time = "2025-10-19T02:39:22.269Z" },
 ]
 
 [[package]]
@@ -155,6 +150,6 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "pyqt6", specifier = ">=6.9.1" },
-    { name = "qt-ingot", specifier = ">=0.0.1" },
+    { name = "qt-ingot", specifier = ">=0.0.2" },
     { name = "rich", specifier = ">=14.2.0" },
 ]
