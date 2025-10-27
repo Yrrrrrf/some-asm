@@ -1,5 +1,5 @@
 <h1 align="center">
-  <img src="https://raw.githubusercontent.com/Yrrrrrf/some-asm/main/resources/img/static/img/chart.png" alt="Some Assembly" width="128">
+  <img src="https://raw.githubusercontent.com/Yrrrrrf/some-asm/main/resources/img/static/chart.png" alt="Some Assembly" width="128">
   <div align="center">Some Assembly</div>
 </h1>
 
