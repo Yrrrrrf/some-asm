@@ -24,6 +24,7 @@ dependencies = [
     "pyqt6>=6.9.1",
     "qt-ingot>=0.0.5",
     "pydantic>=2.12.3",
+    "typer>=0.20.0",
 ]
 
 [project.urls]
