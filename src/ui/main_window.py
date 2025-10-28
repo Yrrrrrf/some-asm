@@ -124,11 +124,11 @@ class MainWindow(IngotApp):
         # Connect itemSelectionChanged signal for table-to-code synchronization
         self._connect_table_selection_signal()
         
-        # Add some default data to the table for testing purposes
-        self._add_default_table_data()
-        
         # Apply Catppuccin theme
         self._apply_catppuccin_theme()
+        
+        # Initialize with empty analysis
+        self.analyze_code()
 
     def _connect_zoom_signals(self):
         """
@@ -386,6 +386,9 @@ class MainWindow(IngotApp):
                         except AttributeError:
                             # It's not a container that supports .widget()
                             pass
+                
+                # Automatically analyze the loaded content to populate the table
+                self.analyze_code()
                 
                 # Update status bar with the loaded file name
                 file_name = Path(file_path).name
