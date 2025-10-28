@@ -274,7 +274,7 @@ dependencies = [
 [package.metadata]
 requires-dist = [
     { name = "pydantic", specifier = ">=2.12.3" },
-    { name = "pyqt6", specifier = ">=6.9.1" },
+    { name = "pyqt6", specifier = "==6.9.1" },
     { name = "qt-ingot", specifier = ">=0.0.5" },
     { name = "rich", specifier = ">=14.2.0" },
     { name = "typer", specifier = ">=0.20.0" },

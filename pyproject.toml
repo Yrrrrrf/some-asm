@@ -20,11 +20,11 @@ classifiers = [
     "Typing :: Typed",
 ]
 dependencies = [
-    "rich>=14.2.0",
-    "pyqt6>=6.9.1",
-    "qt-ingot>=0.0.5",
-    "pydantic>=2.12.3",
-    "typer>=0.20.0",
+    "rich>=14.2.0", # gui tool
+    "qt-ingot>=0.0.5", # app abstraction
+    "pydantic>=2.12.3", # data validation
+    "typer>=0.20.0", # gui framework
+    "pyqt6==6.9.1",
 ]
 
 [project.urls]
